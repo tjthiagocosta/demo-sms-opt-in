@@ -1,6 +1,13 @@
 import { NextResponse } from "next/server";
 import { promises as fs } from "fs";
 import path from "path";
+import {
+  CONSENT_PATH,
+  CONSENT_VERSION,
+  PRIVACY_PATH,
+  TERMS_PATH,
+  getAbsoluteProgramUrl
+} from "../../../lib/smsProgram";
 
 export const runtime = "nodejs";
 
@@ -19,6 +26,16 @@ const getClientIp = (headers) => {
   return forwardedFor.split(",")[0].trim();
 };
 
+const normalizeProgramUrl = (value, origin, fallbackPath) => {
+  const candidate = String(value || "").trim();
+
+  try {
+    return new URL(candidate || fallbackPath, origin).toString();
+  } catch (error) {
+    return getAbsoluteProgramUrl(origin, fallbackPath);
+  }
+};
+
 export async function POST(request) {
   let body;
 
@@ -35,11 +52,18 @@ export async function POST(request) {
   const phoneSanitized = phone.replace(/[^\d+]/g, "");
   const consent = body.consent === true;
   const consentText = String(body.consentText || "").trim();
+  const requestOrigin = new URL(request.url).origin;
   const pageUrl = String(
-    body.pageUrl || request.headers.get("referer") || ""
+    body.pageUrl ||
+      request.headers.get("referer") ||
+      getAbsoluteProgramUrl(requestOrigin, CONSENT_PATH)
   ).trim();
-  const termsUrl = String(body.termsUrl || "").trim();
-  const privacyUrl = String(body.privacyUrl || "").trim();
+  const termsUrl = normalizeProgramUrl(body.termsUrl, requestOrigin, TERMS_PATH);
+  const privacyUrl = normalizeProgramUrl(
+    body.privacyUrl,
+    requestOrigin,
+    PRIVACY_PATH
+  );
 
   if (!phone || phoneSanitized.length < 7) {
     return NextResponse.json(
@@ -68,7 +92,7 @@ export async function POST(request) {
     phoneSanitized,
     consent: true,
     consentText,
-    consentVersion: "v1",
+    consentVersion: CONSENT_VERSION,
     pageUrl,
     termsUrl,
     privacyUrl,

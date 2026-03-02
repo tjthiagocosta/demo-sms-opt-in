@@ -1,12 +1,17 @@
 "use client";
 
 import { useState } from "react";
-
-const TERMS_URL = "https://www.saenzglobal.com/terms-of-service";
-const PRIVACY_URL = "https://www.saenzglobal.com/privacy-policy";
-
-const CONSENT_TEXT =
-  "I agree to receive SMS messages from Saenz Global for service updates, onboarding coordination, appointment confirmations, and operational notifications. No marketing messages. Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase or services. See Terms of Service and Privacy Policy. No mobile information will be shared with third parties/affiliates for marketing/promotional purposes.";
+import {
+  BUSINESS_NAME,
+  CONSENT_DISCLOSURE,
+  MESSAGE_FREQUENCY_DISCLOSURE,
+  MESSAGE_RATES_DISCLOSURE,
+  NON_SHARING_DISCLOSURE,
+  PRIVACY_PATH,
+  SMS_PROGRAM_USE_CASES_DESCRIPTION,
+  TERMS_PATH,
+  getAbsoluteProgramUrl
+} from "../../lib/smsProgram";
 
 export default function ConsentForm() {
   const [status, setStatus] = useState("idle");
@@ -28,6 +33,8 @@ export default function ConsentForm() {
     }
 
     try {
+      const origin = window.location.origin;
+
       const response = await fetch("/api/sms-consent", {
         method: "POST",
         headers: {
@@ -36,9 +43,9 @@ export default function ConsentForm() {
         body: JSON.stringify({
           phone,
           consent,
-          consentText: CONSENT_TEXT,
-          termsUrl: TERMS_URL,
-          privacyUrl: PRIVACY_URL,
+          consentText: CONSENT_DISCLOSURE,
+          termsUrl: getAbsoluteProgramUrl(origin, TERMS_PATH),
+          privacyUrl: getAbsoluteProgramUrl(origin, PRIVACY_PATH),
           pageUrl: window.location.href
         })
       });
@@ -75,10 +82,22 @@ export default function ConsentForm() {
         <input id="consent" name="consent" type="checkbox" required />
         <label htmlFor="consent">
           <span className="consent-label-main">
-            I agree to receive SMS messages from Saenz Global for service updates, onboarding coordination, appointment confirmations, and operational notifications. <strong>No marketing messages.</strong>
+            I agree to receive SMS messages from {BUSINESS_NAME} for{" "}
+            {SMS_PROGRAM_USE_CASES_DESCRIPTION}.{" "}
+            <strong>No marketing messages.</strong>
           </span>
           <span className="consent-label-details">
-            Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase or services. See <a href={TERMS_URL} target="_blank" rel="noopener noreferrer">Terms of Service</a> and <a href={PRIVACY_URL} target="_blank" rel="noopener noreferrer">Privacy Policy</a>. No mobile information will be shared with third parties/affiliates for marketing/promotional purposes.
+            {MESSAGE_FREQUENCY_DISCLOSURE} {MESSAGE_RATES_DISCLOSURE} Reply STOP
+            to opt out, HELP for help. Consent is not a condition of purchase
+            or services. See{" "}
+            <a href={TERMS_PATH} target="_blank" rel="noopener noreferrer">
+              Terms of Service
+            </a>{" "}
+            and{" "}
+            <a href={PRIVACY_PATH} target="_blank" rel="noopener noreferrer">
+              Privacy Policy
+            </a>
+            . {NON_SHARING_DISCLOSURE}
           </span>
         </label>
       </div>
