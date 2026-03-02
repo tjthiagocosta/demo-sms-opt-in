@@ -1,9 +1,11 @@
 import {
   BUSINESS_NAME,
   CONSENT_PATH,
+  CONTACT_PATH,
   HELP_DISCLOSURE,
   NON_SHARING_DISCLOSURE,
   POLICY_EFFECTIVE_DATE,
+  SITE_ORIGIN,
   STOP_DISCLOSURE,
   SUPPORT_EMAIL,
   SUPPORT_PHONE_DISPLAY,
@@ -36,6 +38,7 @@ export default function PrivacyPolicyPage() {
         <div className="link-row">
           <a href={CONSENT_PATH}>SMS Consent Form</a>
           <a href={TERMS_PATH}>Terms of Service</a>
+          <a href={CONTACT_PATH}>Contact</a>
         </div>
       </header>
 
@@ -46,6 +49,24 @@ export default function PrivacyPolicyPage() {
             This SMS Privacy Policy applies only to {BUSINESS_NAME}
             {"'"}s SMS messaging program and explains how we handle
             SMS-related personal information.
+          </p>
+        </section>
+
+        <section className="legal-section">
+          <h2>How You Opt In</h2>
+          <p>
+            Users provide explicit SMS consent only through our website at{" "}
+            <a href={CONSENT_PATH}>
+              {SITE_ORIGIN}
+              {CONSENT_PATH}
+            </a>
+            .
+          </p>
+          <p>
+            To opt in, the user enters a mobile phone number, reviews the SMS
+            disclosure, and checks an unchecked consent checkbox before
+            submitting the form. We do not send SMS messages before this
+            affirmative opt-in is completed.
           </p>
         </section>
 
@@ -118,6 +139,10 @@ export default function PrivacyPolicyPage() {
             If you have questions about this SMS Privacy Policy or the SMS
             program, contact <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>{" "}
             or <a href={`tel:${SUPPORT_PHONE_LINK}`}>{SUPPORT_PHONE_DISPLAY}</a>.
+          </p>
+          <p>
+            You can also visit our <a href={CONTACT_PATH}>support contact page</a>{" "}
+            for SMS program assistance.
           </p>
         </section>
 

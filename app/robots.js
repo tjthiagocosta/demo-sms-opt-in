@@ -1,3 +1,5 @@
+import { SITE_ORIGIN } from "../lib/smsProgram";
+
 export default function robots() {
   return {
     rules: [
@@ -6,6 +8,6 @@ export default function robots() {
         allow: "/"
       }
     ],
-    sitemap: "https://www.saenzglobal.com/sitemap.xml"
+    sitemap: `${SITE_ORIGIN}/sitemap.xml`
   };
 }

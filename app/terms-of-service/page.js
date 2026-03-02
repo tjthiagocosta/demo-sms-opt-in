@@ -1,6 +1,7 @@
 import {
   BUSINESS_NAME,
   CONSENT_PATH,
+  CONTACT_PATH,
   MESSAGE_FREQUENCY_DISCLOSURE,
   MESSAGE_RATES_DISCLOSURE,
   POLICY_EFFECTIVE_DATE,
@@ -38,6 +39,7 @@ export default function TermsOfServicePage() {
         <div className="link-row">
           <a href={CONSENT_PATH}>SMS Consent Form</a>
           <a href={PRIVACY_PATH}>Privacy Policy</a>
+          <a href={CONTACT_PATH}>Contact</a>
         </div>
       </header>
 
@@ -85,6 +87,9 @@ export default function TermsOfServicePage() {
           <p className="legal-note">
             Support: <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a> or{" "}
             <a href={`tel:${SUPPORT_PHONE_LINK}`}>{SUPPORT_PHONE_DISPLAY}</a>
+          </p>
+          <p>
+            You can also visit our <a href={CONTACT_PATH}>support contact page</a>.
           </p>
         </section>
 
