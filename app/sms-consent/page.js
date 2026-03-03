@@ -1,6 +1,7 @@
 import ConsentForm from "./ConsentForm";
 import {
   BUSINESS_NAME,
+  CARRIER_LIABILITY_DISCLOSURE,
   CONFIRMATION_SMS_PREVIEW,
   MESSAGE_FREQUENCY_DISCLOSURE,
   MESSAGE_RATES_DISCLOSURE,
@@ -60,7 +61,7 @@ export default function SmsConsentPage() {
                 <strong>Help:</strong> Reply HELP for help.
               </li>
               <li>
-                <strong>Carrier liability:</strong> Carriers are not liable for delayed or undelivered messages.
+                <strong>Carrier liability:</strong> {CARRIER_LIABILITY_DISCLOSURE}
               </li>
               <li className="detail-list-divider">
                 <strong>Support:</strong> Email{" "}

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import {
   BUSINESS_NAME,
+  CARRIER_LIABILITY_DISCLOSURE,
   CONSENT_DISCLOSURE,
   MESSAGE_FREQUENCY_DISCLOSURE,
   MESSAGE_RATES_DISCLOSURE,
@@ -88,8 +89,8 @@ export default function ConsentForm() {
           </span>
           <span className="consent-label-details">
             {MESSAGE_FREQUENCY_DISCLOSURE} {MESSAGE_RATES_DISCLOSURE} Reply STOP
-            to opt out, HELP for help. Consent is not a condition of purchase
-            or services. See{" "}
+            to opt out, HELP for help. {CARRIER_LIABILITY_DISCLOSURE} Consent is
+            not a condition of purchase or services. See{" "}
             <a href={TERMS_PATH} target="_blank" rel="noopener noreferrer">
               Terms of Service
             </a>{" "}

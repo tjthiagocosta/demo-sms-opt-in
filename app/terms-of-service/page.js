@@ -1,5 +1,6 @@
 import {
   BUSINESS_NAME,
+  CARRIER_LIABILITY_DISCLOSURE,
   CONSENT_PATH,
   CONTACT_PATH,
   MESSAGE_FREQUENCY_DISCLOSURE,
@@ -95,9 +96,7 @@ export default function TermsOfServicePage() {
 
         <section className="legal-section">
           <h2>Carrier Disclaimer</h2>
-          <p>
-            Carriers are not liable for delayed or undelivered messages.
-          </p>
+          <p>{CARRIER_LIABILITY_DISCLOSURE}</p>
         </section>
 
         <section className="legal-section">
