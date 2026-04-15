@@ -48,10 +48,15 @@ export async function POST(request) {
     );
   }
 
+  const name = String(body.name || "").trim();
   const phone = String(body.phone || "").trim();
   const phoneSanitized = phone.replace(/[^\d+]/g, "");
-  const consent = body.consent === true;
-  const consentText = String(body.consentText || "").trim();
+  const marketingConsent = body.marketingConsent === true;
+  const transactionalConsent = body.transactionalConsent === true;
+  const marketingConsentText = String(body.marketingConsentText || "").trim();
+  const transactionalConsentText = String(
+    body.transactionalConsentText || ""
+  ).trim();
   const requestOrigin = new URL(request.url).origin;
   const pageUrl = String(
     body.pageUrl ||
@@ -65,21 +70,21 @@ export async function POST(request) {
     PRIVACY_PATH
   );
 
-  if (!phone || phoneSanitized.length < 7) {
+  if (!name) {
+    return NextResponse.json(
+      { error: "Please enter your full name." },
+      { status: 400 }
+    );
+  }
+
+  if (phone && phoneSanitized.length < 7) {
     return NextResponse.json(
       { error: "Please enter a valid phone number." },
       { status: 400 }
     );
   }
 
-  if (!consent) {
-    return NextResponse.json(
-      { error: "Consent checkbox must be accepted." },
-      { status: 400 }
-    );
-  }
-
-  if (!consentText) {
+  if (!marketingConsentText || !transactionalConsentText) {
     return NextResponse.json(
       { error: "Consent language is missing." },
       { status: 400 }
@@ -88,10 +93,13 @@ export async function POST(request) {
 
   const record = {
     timestamp: new Date().toISOString(),
+    name,
     phone,
     phoneSanitized,
-    consent: true,
-    consentText,
+    marketingConsent,
+    transactionalConsent,
+    marketingConsentText,
+    transactionalConsentText,
     consentVersion: CONSENT_VERSION,
     pageUrl,
     termsUrl,

@@ -2,15 +2,10 @@
 
 import { useState } from "react";
 import {
-  BUSINESS_NAME,
-  CARRIER_LIABILITY_DISCLOSURE,
-  CONSENT_DISCLOSURE,
-  MESSAGE_FREQUENCY_DISCLOSURE,
-  MESSAGE_RATES_DISCLOSURE,
-  NON_SHARING_DISCLOSURE,
+  MARKETING_CONSENT_DISCLOSURE,
   PRIVACY_PATH,
-  SMS_PROGRAM_USE_CASES_DESCRIPTION,
   TERMS_PATH,
+  TRANSACTIONAL_CONSENT_DISCLOSURE,
   getAbsoluteProgramUrl
 } from "../../lib/smsProgram";
 
@@ -24,11 +19,13 @@ export default function ConsentForm() {
     setError("");
 
     const formData = new FormData(event.currentTarget);
+    const name = String(formData.get("name") || "").trim();
     const phone = String(formData.get("phone") || "").trim();
-    const consent = formData.get("consent") === "on";
+    const marketingConsent = formData.get("marketingConsent") === "on";
+    const transactionalConsent = formData.get("transactionalConsent") === "on";
 
-    if (!phone || !consent) {
-      setError("Please provide a phone number and accept the consent checkbox.");
+    if (!name) {
+      setError("Please enter your full name.");
       setStatus("idle");
       return;
     }
@@ -42,9 +39,12 @@ export default function ConsentForm() {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
+          name,
           phone,
-          consent,
-          consentText: CONSENT_DISCLOSURE,
+          marketingConsent,
+          transactionalConsent,
+          marketingConsentText: MARKETING_CONSENT_DISCLOSURE,
+          transactionalConsentText: TRANSACTIONAL_CONSENT_DISCLOSURE,
           termsUrl: getAbsoluteProgramUrl(origin, TERMS_PATH),
           privacyUrl: getAbsoluteProgramUrl(origin, PRIVACY_PATH),
           pageUrl: window.location.href
@@ -67,49 +67,60 @@ export default function ConsentForm() {
   return (
     <form className="consent-form" onSubmit={handleSubmit}>
       <div className="form-field">
-        <label htmlFor="phone">Mobile phone number</label>
+        <label htmlFor="name">Full name</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          autoComplete="name"
+          placeholder="Jane Smith"
+          required
+        />
+      </div>
+
+      <div className="form-field">
+        <label htmlFor="phone">
+          Phone Number{" "}
+          <span className="form-field__hint">*required for opt-in</span>
+        </label>
         <input
           id="phone"
           name="phone"
           type="tel"
           inputMode="tel"
           autoComplete="tel"
-          placeholder="(555) 555-5555"
-          required
+          placeholder="+1 (555) 000-0000"
         />
       </div>
 
       <div className="form-field form-field--checkbox">
-        <input id="consent" name="consent" type="checkbox" required />
-        <label htmlFor="consent">
-          <span className="consent-label-main">
-            I agree to receive SMS messages from {BUSINESS_NAME} for{" "}
-            {SMS_PROGRAM_USE_CASES_DESCRIPTION}.{" "}
-            <strong>No marketing messages.</strong>
-          </span>
-          <span className="consent-label-details">
-            {MESSAGE_FREQUENCY_DISCLOSURE} {MESSAGE_RATES_DISCLOSURE} Reply STOP
-            to opt out, HELP for help. {CARRIER_LIABILITY_DISCLOSURE} Consent is
-            not a condition of purchase or services. See{" "}
-            <a href={TERMS_PATH} target="_blank" rel="noopener noreferrer">
-              Terms of Service
-            </a>{" "}
-            and{" "}
-            <a href={PRIVACY_PATH} target="_blank" rel="noopener noreferrer">
-              Privacy Policy
-            </a>
-            . {NON_SHARING_DISCLOSURE}
-          </span>
+        <input id="marketingConsent" name="marketingConsent" type="checkbox" />
+        <label htmlFor="marketingConsent">{MARKETING_CONSENT_DISCLOSURE}</label>
+      </div>
+
+      <div className="form-field form-field--checkbox">
+        <input
+          id="transactionalConsent"
+          name="transactionalConsent"
+          type="checkbox"
+        />
+        <label htmlFor="transactionalConsent">
+          {TRANSACTIONAL_CONSENT_DISCLOSURE}
         </label>
       </div>
 
+      <div className="consent-form__footer-links">
+        <a href={PRIVACY_PATH}>Privacy Policy</a>
+        <a href={TERMS_PATH}>Terms of Service</a>
+      </div>
+
       <button type="submit" disabled={status === "loading"}>
-        {status === "loading" ? "Submitting..." : "Submit consent"}
+        {status === "loading" ? "Submitting..." : "Submit"}
       </button>
 
       {status === "success" ? (
         <div className="form-success" role="status">
-          Consent received. You will get a confirmation text message shortly.
+          Thanks! Your preferences have been recorded.
         </div>
       ) : null}
 
