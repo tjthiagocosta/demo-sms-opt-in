@@ -412,40 +412,7 @@ button:disabled {
 .consent-success__subtitle {
   color: var(--sg-slate);
   font-size: 0.9375rem;
-  margin: 0 0 20px;
-}
-
-.consent-success__info {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  background: var(--sg-light);
-  border: 1px solid var(--sg-border);
-  border-radius: 12px;
-  padding: 14px 16px;
-  width: 100%;
-  text-align: left;
-  margin-bottom: 20px;
-}
-
-.consent-success__info-icon {
-  flex-shrink: 0;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: var(--sg-white);
-  color: var(--sg-blue);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--sg-border);
-}
-
-.consent-success__info p {
-  margin: 0;
-  color: var(--sg-slate);
-  font-size: 0.875rem;
-  line-height: 1.55;
+  margin: 0 0 24px;
 }
 
 .consent-success__button {
