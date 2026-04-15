@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import {
+  BUSINESS_NAME,
   MARKETING_CONSENT_DISCLOSURE,
   PRIVACY_PATH,
   TERMS_PATH,
@@ -21,7 +22,8 @@ export default function ConsentForm() {
     setStatus("loading");
     setError("");
 
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const name = String(formData.get("name") || "").trim();
     const phone = String(formData.get("phone") || "").trim();
     const marketingConsent = formData.get("marketingConsent") === "on";
@@ -59,13 +61,74 @@ export default function ConsentForm() {
         throw new Error("Unable to submit consent. Please try again.");
       }
 
-      event.currentTarget.reset();
+      form.reset();
       setStatus("success");
     } catch (err) {
       setStatus("idle");
       setError(err.message);
     }
   };
+
+  if (status === "success") {
+    return (
+      <div className="consent-success" role="status" aria-live="polite">
+        <div className="consent-success__icon" aria-hidden="true">
+          <svg
+            width="36"
+            height="36"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </div>
+        <h3 className="consent-success__title">You&rsquo;re subscribed!</h3>
+        <p className="consent-success__subtitle">
+          Thanks for opting in to {BUSINESS_NAME} SMS.
+        </p>
+        <div className="consent-success__info">
+          <span
+            className="consent-success__info-icon"
+            aria-hidden="true"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
+          </span>
+          <p>
+            We&rsquo;ll text you with the message types you selected. Reply
+            STOP at any time to opt out.
+          </p>
+        </div>
+        <button
+          type="button"
+          className="consent-success__button"
+          onClick={() => {
+            setStatus("idle");
+            setError("");
+          }}
+        >
+          Sign up another number
+        </button>
+        <p className="consent-success__hint">
+          Message and data rates may apply.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <form className="consent-form" onSubmit={handleSubmit}>
@@ -120,12 +183,6 @@ export default function ConsentForm() {
       <button type="submit" disabled={status === "loading"}>
         {status === "loading" ? "Submitting..." : "Submit"}
       </button>
-
-      {status === "success" ? (
-        <div className="form-success" role="status">
-          Thanks! Your preferences have been recorded.
-        </div>
-      ) : null}
 
       {error ? (
         <div className="form-error" role="alert">
