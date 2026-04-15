@@ -16,7 +16,7 @@ import {
 export const metadata = {
   title: "Saenz Global SMS Privacy Policy",
   description:
-    "SMS privacy policy for Saenz Global's service-only A2P 10DLC program.",
+    "SMS privacy policy for Saenz Global's A2P 10DLC marketing and transactional SMS program.",
   robots: {
     index: true,
     follow: true
@@ -31,8 +31,8 @@ export default function PrivacyPolicyPage() {
         <h1>{BUSINESS_NAME} SMS Privacy Policy</h1>
         <p className="lede">
           This policy explains how {BUSINESS_NAME} collects, uses, stores, and
-          protects personal information associated with our service-only SMS
-          messaging program.
+          protects personal information associated with our SMS messaging
+          program, which covers both marketing and transactional messages.
         </p>
         <p className="legal-meta">Effective date: {POLICY_EFFECTIVE_DATE}</p>
         <div className="link-row">
@@ -43,6 +43,17 @@ export default function PrivacyPolicyPage() {
       </header>
 
       <div className="info-card legal-card">
+        <section className="legal-section">
+          <h2>Sharing and Disclosure</h2>
+          <p>{NON_SHARING_DISCLOSURE}</p>
+          <p>
+            Text messaging originator opt-in data and consent will not be sold
+            or shared with third parties, except with vendors and platforms that
+            support message delivery, compliance, security, or where disclosure
+            is required by law.
+          </p>
+        </section>
+
         <section className="legal-section">
           <h2>Scope</h2>
           <p>
@@ -63,10 +74,13 @@ export default function PrivacyPolicyPage() {
             .
           </p>
           <p>
-            To opt in, the user enters a mobile phone number, reviews the SMS
-            disclosure, and checks an unchecked consent checkbox before
-            submitting the form. We do not send SMS messages before this
-            affirmative opt-in is completed.
+            To opt in, the user enters their full name and mobile phone
+            number, reviews the SMS disclosures, and affirmatively checks one
+            or both of the SMS consent checkboxes (Marketing SMS and/or
+            Transactional SMS) before submitting the form. Marketing SMS and
+            Transactional SMS are treated as separate consents. We do not send
+            SMS messages of a given type before affirmative opt-in for that
+            type is completed.
           </p>
         </section>
 
@@ -74,10 +88,17 @@ export default function PrivacyPolicyPage() {
           <h2>Information We Collect</h2>
           <p>When you opt in, we may collect and maintain records of:</p>
           <ul className="legal-list">
+            <li>Your full name</li>
             <li>Your mobile phone number</li>
-            <li>Your consent status</li>
+            <li>
+              Your consent status for Marketing SMS and Transactional SMS,
+              recorded separately
+            </li>
             <li>The timestamp of your consent submission</li>
-            <li>The consent language and consent version presented to you</li>
+            <li>
+              The consent language and consent version shown for each SMS
+              category you reviewed
+            </li>
             <li>The page used to opt in</li>
             <li>
               Technical log data used for compliance and security, including IP
@@ -89,23 +110,15 @@ export default function PrivacyPolicyPage() {
         <section className="legal-section">
           <h2>How We Use Information</h2>
           <ul className="legal-list">
-            <li>Send the service-related SMS messages you requested</li>
-            <li>Confirm your opt-in status</li>
+            <li>
+              Send the Marketing and/or Transactional SMS messages you opted in
+              to receive
+            </li>
+            <li>Confirm your opt-in status for each SMS category</li>
             <li>Process STOP and HELP requests</li>
             <li>Maintain consent records for compliance purposes</li>
             <li>Provide customer support related to the SMS program</li>
           </ul>
-        </section>
-
-        <section className="legal-section">
-          <h2>Sharing and Disclosure</h2>
-          <p>{NON_SHARING_DISCLOSURE}</p>
-          <p>
-            Text messaging originator opt-in data and consent will not be sold
-            or shared with third parties, except with vendors and platforms that
-            support message delivery, compliance, security, or where disclosure
-            is required by law.
-          </p>
         </section>
 
         <section className="legal-section">
