@@ -9,6 +9,9 @@ import {
   getAbsoluteProgramUrl
 } from "../../lib/smsProgram";
 
+const CONSENT_WEBHOOK_URL =
+  "https://hook.us2.make.com/neicvlbbkyjlfe2dvbqepu84v4wvxeas";
+
 export default function ConsentForm() {
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState("");
@@ -33,7 +36,7 @@ export default function ConsentForm() {
     try {
       const origin = window.location.origin;
 
-      const response = await fetch("/api/sms-consent", {
+      const response = await fetch(CONSENT_WEBHOOK_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -47,13 +50,13 @@ export default function ConsentForm() {
           transactionalConsentText: TRANSACTIONAL_CONSENT_DISCLOSURE,
           termsUrl: getAbsoluteProgramUrl(origin, TERMS_PATH),
           privacyUrl: getAbsoluteProgramUrl(origin, PRIVACY_PATH),
-          pageUrl: window.location.href
+          pageUrl: window.location.href,
+          submittedAt: new Date().toISOString()
         })
       });
 
       if (!response.ok) {
-        const data = await response.json().catch(() => ({}));
-        throw new Error(data.error || "Unable to submit consent.");
+        throw new Error("Unable to submit consent. Please try again.");
       }
 
       event.currentTarget.reset();
