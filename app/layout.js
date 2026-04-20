@@ -15,9 +15,9 @@ const manrope = Manrope({
 });
 
 export const metadata = {
-  title: "Saenz Global SMS Consent",
+  title: "Saenz Global SMS Program",
   description:
-    "SMS consent disclosure page for Saenz Global onboarding and service notifications.",
+    "SMS program policies and support information for Saenz Global customer care messaging.",
   metadataBase: new URL(SITE_ORIGIN)
 };
 

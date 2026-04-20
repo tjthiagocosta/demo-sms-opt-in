@@ -1,23 +1,24 @@
 import {
   BUSINESS_NAME,
   CARRIER_LIABILITY_DISCLOSURE,
-  CONSENT_PATH,
   CONTACT_PATH,
+  CUSTOMER_CARE_USE_CASES,
+  HELP_DISCLOSURE,
   MESSAGE_FREQUENCY_DISCLOSURE,
   MESSAGE_RATES_DISCLOSURE,
   POLICY_EFFECTIVE_DATE,
   PRIVACY_PATH,
-  SMS_PROGRAM_USE_CASES,
-  SMS_PROGRAM_USE_CASES_DESCRIPTION,
+  STOP_DISCLOSURE,
   SUPPORT_EMAIL,
   SUPPORT_PHONE_DISPLAY,
-  SUPPORT_PHONE_LINK
+  SUPPORT_PHONE_LINK,
+  TERMS_PATH
 } from "../../lib/smsProgram";
 
 export const metadata = {
   title: "Saenz Global SMS Terms of Service",
   description:
-    "SMS messaging terms for Saenz Global's A2P 10DLC marketing and transactional SMS program.",
+    "SMS messaging terms for Saenz Global's customer care SMS program.",
   robots: {
     index: true,
     follow: true
@@ -32,15 +33,12 @@ export default function TermsOfServicePage() {
         <h1>{BUSINESS_NAME} SMS Messaging Terms</h1>
         <p className="lede">
           These SMS Messaging Terms govern {BUSINESS_NAME}
-          {"'"}s text messaging program, which covers{" "}
-          {SMS_PROGRAM_USE_CASES_DESCRIPTION}. Marketing SMS and
-          transactional SMS are treated as separate consents that users can
-          opt into independently.
+          {"'"}s customer care text messaging program for active clients.
         </p>
         <p className="legal-meta">Effective date: {POLICY_EFFECTIVE_DATE}</p>
         <div className="link-row">
-          <a href={CONSENT_PATH}>SMS Consent Form</a>
           <a href={PRIVACY_PATH}>Privacy Policy</a>
+          <a href={TERMS_PATH}>Terms of Service</a>
           <a href={CONTACT_PATH}>Contact</a>
         </div>
       </header>
@@ -49,34 +47,30 @@ export default function TermsOfServicePage() {
         <section className="legal-section">
           <h2>SMS Program Overview</h2>
           <p>
-            {BUSINESS_NAME} sends SMS messages only to users who have
-            affirmatively opted in through the SMS consent form on this
-            website. Messages may include:
+            Saenz Global sends SMS messages only to clients who have verbally
+            opted in during an onboarding or support phone call with a Saenz
+            Global representative. Messages in this program are customer care
+            and transactional in nature and may include:
           </p>
           <ul className="legal-list">
-            {SMS_PROGRAM_USE_CASES.map((useCase) => (
+            {CUSTOMER_CARE_USE_CASES.map((useCase) => (
               <li key={useCase}>{useCase}</li>
             ))}
           </ul>
           <p>
-            Lead generation messages and purchased-list messaging are not
-            included in this SMS program. We only send SMS to users who have
-            provided affirmative opt-in for the relevant message category.
+            This program does not include marketing messages, promotional
+            offers, lead generation messages, or messages to purchased lists.
           </p>
         </section>
 
         <section className="legal-section">
           <h2>Opt-In and Consent</h2>
           <p>
-            You opt in by submitting the SMS consent form on this website and
-            affirmatively checking the consent checkbox for Marketing SMS,
-            Transactional SMS, or both, before submitting the form. Marketing
-            SMS and Transactional SMS are separate consents — opting in to one
-            does not opt you in to the other.
-          </p>
-          <p>
-            Your consent applies only to {BUSINESS_NAME}. Consent to receive
-            text messages is not a condition of purchase or services.
+            You opt in by providing verbal consent during a phone call with a
+            Saenz Global representative after being read our SMS disclosure
+            script. Your consent applies only to Saenz Global and only to the
+            customer care messaging described in these Terms. Consent to receive
+            text messages is not a condition of purchase or service.
           </p>
         </section>
 
@@ -88,8 +82,8 @@ export default function TermsOfServicePage() {
 
         <section className="legal-section">
           <h2>Opt-Out and Help</h2>
-          <p>Reply STOP to opt out of future SMS messages at any time.</p>
-          <p>Reply HELP for help or contact us directly for support.</p>
+          <p>{STOP_DISCLOSURE}</p>
+          <p>{HELP_DISCLOSURE}</p>
           <p className="legal-note">
             Support: <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a> or{" "}
             <a href={`tel:${SUPPORT_PHONE_LINK}`}>{SUPPORT_PHONE_DISPLAY}</a>
@@ -111,10 +105,9 @@ export default function TermsOfServicePage() {
             which you have authority to provide consent.
           </p>
           <p>
-            This SMS program is open to users who affirmatively opt in through
-            the {BUSINESS_NAME} SMS consent form and want to receive marketing
-            messages, transactional messages (account notifications and 2FA),
-            or both from {BUSINESS_NAME}.
+            This SMS program is open only to clients who verbally opt in during
+            a phone call with a {BUSINESS_NAME} representative and want to
+            receive customer care messages about ongoing work.
           </p>
         </section>
 

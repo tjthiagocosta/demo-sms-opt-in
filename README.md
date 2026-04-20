@@ -1,24 +1,12 @@
-# Saenz Global SMS Consent Demo
+# Saenz Global SMS Program Pages
 
-## Consent storage (internal note)
-Submissions are recorded by `app/api/sms-consent/route.js` and appended to
-`data/consents.jsonl` as JSON Lines. Each record stores:
-
-- timestamp
-- phone and phoneSanitized
-- pageUrl
-- ipAddress
-- userAgent
-- consentText and consentVersion
-- termsUrl and privacyUrl
-
-Note: Vercel serverless file storage is ephemeral. For production retention,
-replace the file append with durable storage (Postgres, S3, or another datastore)
-while keeping the same fields for compliance.
+This Next.js app hosts the public SMS program pages for `sms.saenzglobal.com`,
+including the Privacy Policy, Terms of Service, and support contact page for
+Saenz Global's customer care SMS program. SMS enrollment is handled verbally
+during onboarding or support phone calls rather than through a website flow.
 
 ## Local development
 ```
 npm install
 npm run dev
 ```
-# demo-sms-opt-in

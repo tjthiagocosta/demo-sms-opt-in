@@ -1,11 +1,10 @@
 import {
   BUSINESS_NAME,
-  CONSENT_PATH,
   CONTACT_PATH,
   HELP_DISCLOSURE,
   NON_SHARING_DISCLOSURE,
   POLICY_EFFECTIVE_DATE,
-  SITE_ORIGIN,
+  PRIVACY_PATH,
   STOP_DISCLOSURE,
   SUPPORT_EMAIL,
   SUPPORT_PHONE_DISPLAY,
@@ -16,7 +15,7 @@ import {
 export const metadata = {
   title: "Saenz Global SMS Privacy Policy",
   description:
-    "SMS privacy policy for Saenz Global's A2P 10DLC marketing and transactional SMS program.",
+    "SMS privacy policy for Saenz Global's customer care SMS program.",
   robots: {
     index: true,
     follow: true
@@ -32,11 +31,11 @@ export default function PrivacyPolicyPage() {
         <p className="lede">
           This policy explains how {BUSINESS_NAME} collects, uses, stores, and
           protects personal information associated with our SMS messaging
-          program, which covers both marketing and transactional messages.
+          program for customer care communications.
         </p>
         <p className="legal-meta">Effective date: {POLICY_EFFECTIVE_DATE}</p>
         <div className="link-row">
-          <a href={CONSENT_PATH}>SMS Consent Form</a>
+          <a href={PRIVACY_PATH}>Privacy Policy</a>
           <a href={TERMS_PATH}>Terms of Service</a>
           <a href={CONTACT_PATH}>Contact</a>
         </div>
@@ -66,21 +65,20 @@ export default function PrivacyPolicyPage() {
         <section className="legal-section">
           <h2>How You Opt In</h2>
           <p>
-            Users provide explicit SMS consent only through our website at{" "}
-            <a href={CONSENT_PATH}>
-              {SITE_ORIGIN}
-              {CONSENT_PATH}
-            </a>
-            .
+            Users provide explicit SMS consent verbally during a scheduled
+            onboarding or support phone call with a Saenz Global
+            representative. Before any mobile number is enrolled in our SMS
+            program, the representative reads a disclosure that identifies
+            Saenz Global as the sender, describes the types of messages that
+            will be sent, states that message and data rates may apply, and
+            explains how to opt out by replying STOP or get help by replying
+            HELP. The user must verbally agree before their number is added. We
+            record the date, time, representative name, and the user's verbal
+            confirmation in our internal system.
           </p>
           <p>
-            To opt in, the user enters their full name and mobile phone
-            number, reviews the SMS disclosures, and affirmatively checks one
-            or both of the SMS consent checkboxes (Marketing SMS and/or
-            Transactional SMS) before submitting the form. Marketing SMS and
-            Transactional SMS are treated as separate consents. We do not send
-            SMS messages of a given type before affirmative opt-in for that
-            type is completed.
+            Consent to receive SMS messages is not a condition of purchase or
+            service.
           </p>
         </section>
 
@@ -90,31 +88,19 @@ export default function PrivacyPolicyPage() {
           <ul className="legal-list">
             <li>Your full name</li>
             <li>Your mobile phone number</li>
-            <li>
-              Your consent status for Marketing SMS and Transactional SMS,
-              recorded separately
-            </li>
-            <li>The timestamp of your consent submission</li>
-            <li>
-              The consent language and consent version shown for each SMS
-              category you reviewed
-            </li>
-            <li>The page used to opt in</li>
-            <li>
-              Technical log data used for compliance and security, including IP
-              address and user agent
-            </li>
+            <li>Your verbal consent confirmation</li>
+            <li>The timestamp of consent</li>
+            <li>The name of the Saenz Global representative who collected consent</li>
+            <li>The disclosure script version read to the user</li>
+            <li>Internal call or CRM log references used for compliance</li>
           </ul>
         </section>
 
         <section className="legal-section">
           <h2>How We Use Information</h2>
           <ul className="legal-list">
-            <li>
-              Send the Marketing and/or Transactional SMS messages you opted in
-              to receive
-            </li>
-            <li>Confirm your opt-in status for each SMS category</li>
+            <li>Send the customer care SMS messages you agreed to receive</li>
+            <li>Confirm and document your SMS consent status</li>
             <li>Process STOP and HELP requests</li>
             <li>Maintain consent records for compliance purposes</li>
             <li>Provide customer support related to the SMS program</li>

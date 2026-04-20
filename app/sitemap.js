@@ -1,5 +1,4 @@
 import {
-  CONSENT_PATH,
   CONTACT_PATH,
   PRIVACY_PATH,
   SITE_ORIGIN,
@@ -11,7 +10,6 @@ export default function sitemap() {
 
   return [
     "",
-    CONSENT_PATH,
     TERMS_PATH,
     PRIVACY_PATH,
     CONTACT_PATH
